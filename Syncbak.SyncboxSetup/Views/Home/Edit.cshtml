@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Syncbak Start to Finish";
+}
+
+@using (Ajax.BeginForm("Search", "Owners", new AjaxOptions { UpdateTargetId = "gridContainer", HttpMethod = "POST", InsertionMode = InsertionMode.Replace }))
+{
+    <label for="stationList">Stations</label>
+    <select id="stationList" data-bind="options: stations, value: selectedStation, optionsText: 'CallSign', optionsValue: 'ID'"></select>
+    <span data-bind="visible: steps().length > 0">
+        <label for="AccountOwner">Account Owner</label>
+        <input id="AccountOwner" type="text" data-bind="value: selectedAccountOwner" />
+        <label><input type="checkbox" data-bind="checked: selectedIsComplete">Is Complete</label>
+    </span>
+    <button id="AddStepsButton" data-bind="click: addInitialSteps, visible: steps().length == 0">Add Initial Steps</button>
+}
+
+<div id="gridContainer" class="grid" style=" clear:both;">
+    @{ Html.RenderPartial("ViewStepList.Partial"); }
+</div>
+<p>
+    @Html.ActionLink("Back to list", "Index")
+</p>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/ViewModels/StepsViewModel.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            model.loadStations(@ViewBag.StationId);
+        });
+    </script>
+}

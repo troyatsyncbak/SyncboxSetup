@@ -1,0 +1,68 @@
+﻿@using Syncbak.SyncboxSetup.Models;
+
+@{
+    ViewBag.Title = "Syncbak Start to Finish";
+}
+
+<form>
+    <div id="gridContainer" class="grid">
+        <div id="scrollDiv" class="autoScroll">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Current Step</th>
+                        <th>Start Date</th>
+                        <th>Completed Date</th>
+                        <th>Status</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: steps">
+                    <tr class="clickable" data-bind="click: $root.editStation">
+                        <td data-bind="html: CallSign + '<br>(' + AccountOwner() + ')'"></td>
+                        <td data-bind="html: CategoryName + '<br>' + StepName"></td>
+                        <td data-bind="date: StartDate"></td>
+                        <td data-bind="date: EndDate"></td>
+                        <td data-bind="text: Status"></td>
+                        <td data-bind="text: Owner"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <button id="ScrollButton" data-bind="click: scroll" style="display: none">Scroll</button>
+        @Html.ActionLink("Edit", "Edit", "Home")
+    </div>
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/ViewModels/StepsViewModel.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            model.loadInstallSteps(0);
+
+            $("#ScrollButton").click(function () {
+                startScroll();
+            });
+        });
+
+        function startScroll() {
+            var scrollHeight = document.getElementById("scrollDiv").scrollHeight;
+            var div = $('div.autoScroll');
+            var scroller = setInterval(function () {
+                var pos = div.scrollTop();
+                div.scrollTop(++pos);
+
+                if (div.scrollTop() + div.innerHeight() >= scrollHeight) {
+                    clearInterval(scroller);
+                    window.location.reload();
+                }
+            }, 100)
+        }
+    </script>
+}

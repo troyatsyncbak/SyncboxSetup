@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Syncbox Setup</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/knockout-3.1.0.js")
+    @Scripts.Render("~/Scripts/knockout.mapping-latest.js")
+    @Scripts.Render("~/Scripts/moment.min.js")
+    @Scripts.Render("~/Scripts/Date.js")
+</head>
+<body>
+    <div id="page">
+        <header id="header" class="unselectable">
+            @Html.ActionLink("SYNCBOX Installations", "Index", "Home", new { }, new { id = "logo" })
+            <div id="logindisplay">
+                @Html.Partial("_LogInPartial")
+            </div>
+        </header>
+        <section id="main">@RenderBody()</section>
+        <footer>Copyright &copy; @DateTime.Now.Year Syncbak  |  1715 1st Avenue NE, Cedar Rapids, IA, 52402</footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿<div id="gridContainer" class="grid">
+    <div id="scrollDiv" class="autoScroll">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Step</th>
+                    <th>Start Date</th>
+                    <th>Completed Date</th>
+                    <th>Status</th>
+                    <th>Owner</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: steps">
+                <tr>
+                    <td data-bind="text: CategoryName"></td>
+                    <td data-bind="text: StepName"><input type="hidden" data-bind="value: StepId" /></td>
+                    <td>
+                        <input type="text" class="stepDate" data-bind="datepicker: StartDate" />
+                    </td>
+                    <td>
+                        <input type="text" class="stepDate" data-bind="datepicker: EndDate" />
+                    </td>
+                    <td><select data-bind="options: $root.statusItems, value: Status, optionsCaption: ''"></select></td>
+                    <td><select data-bind="options: $root.owners, value: Owner, optionsCaption: ''"></select></td>
+                    <td><input type="radio" name="CurrentStepItems" data-bind="checkedValue: InstallStepId, checked: selectedStep" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   

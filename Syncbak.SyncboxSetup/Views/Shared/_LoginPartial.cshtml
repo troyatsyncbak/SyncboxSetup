@@ -1,0 +1,10 @@
+﻿@if (Request.IsAuthenticated)
+{
+    @Html.ActionLink("Tutorials", "Index", "Help", null, new { id = "help" })
+    <span id="username">Welcome @User.Identity.Name</span>
+    <span id="login">@Html.ActionLink("Log Out", "LogOff", "Account")</span>
+}
+else
+{
+    @*@Html.ActionLink("Log On", "Login", "Account")*@
+}
